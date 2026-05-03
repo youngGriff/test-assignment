@@ -1,0 +1,7 @@
+.cdk-dialog-container {
+  display: block;
+  background: #fff;
+  border-radius: 8px;
+  padding: 16px;
+  min-width: 350px;
+}

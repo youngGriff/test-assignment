@@ -1,0 +1,8 @@
+<ng-content />
+@if (error()) {
+  <div class="validation-error">
+    {{ error() }}
+  </div>
+} @else {
+  <div class="validation-placeholder"></div>
+}

@@ -1,0 +1,26 @@
+<h1>Game</h1>
+<main>
+  <game-table [gameState]="gameState" (tileClick)="onTileClick($event)" />
+
+  <div class="info-section">
+    <form class="form" [formRoot]="form">
+      <validation-wrapper>
+        <label for="time-input">Time for click:</label>
+        <input
+          placeholder="Time in mls"
+          id="time-input"
+          class="input"
+          [formField]="form.time"
+          type="number"
+        />
+      </validation-wrapper>
+
+      <button [disabled]="disableStartBtn()" class="start-button">Start</button>
+    </form>
+
+    <div class="score-section">
+      <h4>User score: {{ gameState.userScore() }}</h4>
+      <h4>Computer score: {{ gameState.computerScore() }}</h4>
+    </div>
+  </div>
+</main>

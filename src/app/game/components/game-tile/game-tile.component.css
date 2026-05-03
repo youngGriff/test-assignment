@@ -1,0 +1,26 @@
+:host.highlighting {
+  background: #ffff00;
+}
+
+:host.player-taken {
+  background: #0d8e0d;
+}
+
+:host.computer-taken {
+  background: #e31b1b;
+}
+
+:host {
+  display: block;
+  border: 1px solid white;
+  width: 50px;
+  height: 50px;
+  background: #2563eb;
+}
+
+@media (max-width: 500px) {
+  :host {
+    width: 40px;
+    height: 40px;
+  }
+}

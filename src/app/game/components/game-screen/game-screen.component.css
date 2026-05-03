@@ -1,0 +1,60 @@
+:host {
+  padding-top: 10px;
+  display: block;
+}
+
+h1 {
+  text-align: center;
+}
+
+main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.info-section {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.score-section {
+  margin-top: 10px;
+}
+
+@media (max-width: 768px) {
+  .score-section {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .score-section h4:not(:last-child) {
+    margin-right: 10px;
+  }
+}
+
+label {
+  font-size: 14px;
+  margin-right: 10px;
+}
+
+.validation-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.form {
+  display: flex;
+  margin-top: 20px;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.input {
+  width: 150px;
+}
+
+.start-button {
+  margin-left: 20px;
+  margin-top: 16px;
+}

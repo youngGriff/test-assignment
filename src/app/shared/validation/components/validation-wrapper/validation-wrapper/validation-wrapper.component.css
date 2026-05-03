@@ -1,0 +1,15 @@
+:host {
+  display: block;
+}
+
+.validation-error {
+  color: darkred;
+}
+.validation-placeholder {
+  height: calc(1rem * 1.15);
+}
+
+.validation-error,
+.validation-placeholder {
+  margin-top: 5px;
+}

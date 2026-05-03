@@ -1,0 +1,10 @@
+@for (row of gameState().grid(); let j = $index; track j) {
+  @for (item of row; let i = $index; track i) {
+    <game-tile
+      (click)="onTileClick([j, i])"
+      [highlightingCoordinate]="gameState().highlightingCoordinate()"
+      [coordinate]="[j, i]"
+      [item]="item"
+    ></game-tile>
+  }
+}

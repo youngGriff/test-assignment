@@ -1,1 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
+@import "normalize.css";
+@import "@angular/cdk/overlay-prebuilt.css";
+
+@import "./css/ui/modal/modal.css";
+@import "./css/ui/button/button.css";
+@import "./css/ui/input/input.css";
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}

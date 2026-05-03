@@ -1,0 +1,6 @@
+:host {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(10, 1fr);
+  justify-self: center;
+}

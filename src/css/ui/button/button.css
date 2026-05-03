@@ -1,0 +1,38 @@
+button {
+  border: none;
+  cursor: pointer;
+
+  /* Sizing and typography */
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  font-family: inherit;
+
+  /* Colors and shape */
+  background-color: #2563eb; /* Royal blue */
+  color: #ffffff;
+  border-radius: 6px; /* Smooth rounded corners */
+
+  /* Smooth transition for hover effects */
+  transition:
+    background-color 0.2s ease,
+    transform 0.1s ease;
+}
+
+button.small {
+  padding: 8px 16px;
+  font-size: 14px;
+}
+
+button:disabled {
+  opacity: 0.8;
+  cursor: not-allowed;
+}
+
+bottom:hover {
+  background-color: #1d4ed8;
+}
+
+.button:active {
+  transform: scale(0.98);
+}
