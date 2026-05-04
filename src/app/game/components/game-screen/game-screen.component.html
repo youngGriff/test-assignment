@@ -1,6 +1,6 @@
 <h1>Game</h1>
 <main>
-  <game-table [gameState]="gameState" (tileClick)="onTileClick($event)" />
+  <game-table [gameState]="gameEngine" (tileClick)="onTileClick($event)" />
 
   <div class="info-section">
     <form class="form" [formRoot]="form">
@@ -19,8 +19,8 @@
     </form>
 
     <div class="score-section">
-      <h4>User score: {{ gameState.userScore() }}</h4>
-      <h4>Computer score: {{ gameState.computerScore() }}</h4>
+      <h4>User score: {{ gameEngine.userScore() }}</h4>
+      <h4>Computer score: {{ gameEngine.computerScore() }}</h4>
     </div>
   </div>
 </main>

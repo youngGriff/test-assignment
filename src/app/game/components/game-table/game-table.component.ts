@@ -1,6 +1,6 @@
 import { Component, input, output } from '@angular/core';
 import { GameTileComponent } from '../game-tile/game-tile.component';
-import { GameState } from '../../classes/game-state';
+import { GameEngine } from '../../classes/game-engine';
 import { GameTileCoordinate } from '../../interfaces/game-tile-coordinate.interface';
 
 @Component({
@@ -10,7 +10,7 @@ import { GameTileCoordinate } from '../../interfaces/game-tile-coordinate.interf
   styleUrl: './game-table.component.css',
 })
 export class GameTableComponent {
-  public readonly gameState = input.required<GameState>();
+  public readonly gameState = input.required<GameEngine>();
   public readonly tileClick = output<GameTileCoordinate>();
 
   public onTileClick(coord: GameTileCoordinate) {

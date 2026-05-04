@@ -3,8 +3,12 @@ import { GameCellStatus } from '../enums/game-cell-status.enum';
 import { GameMode } from '../enums/game-mode.enum';
 import { UniqueCoordinatePicker } from './unique-coordinate-picker';
 import { GameTileCoordinate } from '../interfaces/game-tile-coordinate.interface';
+import {
+  GameOptions,
+  GameStartOptions,
+} from '../interfaces/game-options.interface';
 
-export class GameState {
+export class GameEngine {
   public readonly grid = signal<Array<Array<GameCellStatus>>>([[]]);
   public readonly mode = signal<GameMode>(GameMode.Idle);
   public readonly highlightingCoordinate = signal<GameTileCoordinate | null>(
@@ -23,14 +27,22 @@ export class GameState {
   private uniqueCoordinatePicker!: UniqueCoordinatePicker<GameCellStatus>;
 
   constructor(
-    private readonly gameStateOptions = { boardSize: 10, scoreToWin: 10 },
+    private readonly gameOptions: GameOptions = {
+      boardSize: 10,
+      scoreToWin: 10,
+    },
   ) {
     this.resetGrid();
+    this.validateGameOptions(gameOptions);
   }
 
-  public start(startOptions: { highlightingTime: number }): void {
+  public start({ highlightingTime }: GameStartOptions): void {
     if (this.mode() === GameMode.Playing) {
       return;
+    }
+
+    if (highlightingTime <= 0) {
+      throw new Error('Highlighting time must be greater than 0');
     }
 
     this.resetGrid();
@@ -39,7 +51,7 @@ export class GameState {
     this.highlightingCoordinate.set(null);
     this._userScore.set(0);
     this._computerScore.set(0);
-    this.highlightingTime = startOptions.highlightingTime;
+    this.highlightingTime = highlightingTime;
     this.mode.set(GameMode.Playing);
     this.tick();
   }
@@ -87,17 +99,15 @@ export class GameState {
 
   private isGameOver(): boolean {
     return (
-      this._userScore() >= this.gameStateOptions.scoreToWin ||
-      this._computerScore() >= this.gameStateOptions.scoreToWin
+      this._userScore() >= this.gameOptions.scoreToWin ||
+      this._computerScore() >= this.gameOptions.scoreToWin
     );
   }
 
   private resetGrid(): void {
     this.grid.set(
-      [...Array(this.gameStateOptions.boardSize)].map(() =>
-        [...Array(this.gameStateOptions.boardSize)].map(
-          () => GameCellStatus.Empty,
-        ),
+      [...Array(this.gameOptions.boardSize)].map(() =>
+        [...Array(this.gameOptions.boardSize)].map(() => GameCellStatus.Empty),
       ),
     );
   }
@@ -115,5 +125,19 @@ export class GameState {
       newGrid[coordinate[0]][coordinate[1]] = status;
       return newGrid;
     });
+  }
+
+  private validateGameOptions({ boardSize, scoreToWin }: GameOptions): void {
+    if (boardSize <= 0) {
+      throw new Error('Board size must be greater than 0');
+    }
+
+    if (scoreToWin <= 0) {
+      throw new Error('Score to win must be greater than 0');
+    }
+
+    if (boardSize * boardSize < scoreToWin * 2) {
+      throw new Error('Board size is too small for the given score to win');
+    }
   }
 }

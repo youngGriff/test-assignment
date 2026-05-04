@@ -23,6 +23,6 @@ export const validationMessageHelper = (error: ValidationError) => {
     case 'pattern':
       return 'Invalid format';
     default:
-      return error.message || 'Invalid field';
+      return 'Invalid field';
   }
 };

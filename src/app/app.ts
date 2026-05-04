@@ -1,5 +1,4 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component } from '@angular/core';
 import { GameScreenComponent } from './game/components/game-screen/game-screen.component';
 
 @Component({

@@ -3,7 +3,7 @@ import { GameTableComponent } from '../game-table/game-table.component';
 import { FormField, FormRoot } from '@angular/forms/signals';
 import { GameStateForm } from '../../forms/game-state.form';
 import { ValidationWrapperComponent } from '../../../shared/validation/components/validation-wrapper/validation-wrapper/validation-wrapper.component';
-import { GameState } from '../../classes/game-state';
+import { GameEngine } from '../../classes/game-engine';
 import { GameMode } from '../../enums/game-mode.enum';
 import { GameTileCoordinate } from '../../interfaces/game-tile-coordinate.interface';
 import { Dialog } from '@angular/cdk/dialog';
@@ -29,17 +29,20 @@ export class GameScreenComponent {
   public readonly formState = new GameStateForm(() => this.onStart());
   public readonly form = this.formState.form;
 
-  public readonly gameState = new GameState({ boardSize: 10, scoreToWin: 10 });
-  public readonly userScore = this.gameState.userScore;
-  public readonly computerScore = this.gameState.computerScore;
+  public readonly gameEngine = new GameEngine({
+    boardSize: 10,
+    scoreToWin: 10,
+  });
+  public readonly userScore = this.gameEngine.userScore;
+  public readonly computerScore = this.gameEngine.computerScore;
 
   public readonly disableStartBtn = computed(() => {
-    return this.gameState.mode() === GameMode.Playing;
+    return this.gameEngine.mode() === GameMode.Playing;
   });
 
   constructor() {
     effect(() => {
-      if (this.gameState.mode() === GameMode.Finished) {
+      if (this.gameEngine.mode() === GameMode.Finished) {
         const scoreData = untracked<GameResultModalData>(() => ({
           userScore: this.userScore(),
           computerScore: this.computerScore(),
@@ -53,10 +56,10 @@ export class GameScreenComponent {
   }
 
   public onStart(): void {
-    this.gameState.start({ highlightingTime: this.form().value().time! });
+    this.gameEngine.start({ highlightingTime: this.form().value().time! });
   }
 
   public onTileClick(coords: GameTileCoordinate): void {
-    this.gameState.userClickedTile(coords);
+    this.gameEngine.userClickedTile(coords);
   }
 }
