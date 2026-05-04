@@ -4,7 +4,11 @@ import {
   ValidationError,
 } from '@angular/forms/signals';
 
-export const validationMessageHelper = (error: ValidationError) => {
+export const validationMessageHelper = (error: ValidationError | null | undefined) => {
+  if (error === null || error === undefined) {
+    return null;
+  }
+
   if (error.message) {
     return error.message;
   }

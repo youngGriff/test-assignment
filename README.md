@@ -2,6 +2,10 @@
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.9.
 
+## Deployed application
+The application is deployed on GitHub Pages and can be accessed at the following URL:
+[https://younggriff.github.io/test-assignment/](https://younggriff.github.io/test-assignment/)
+
 ## Development server
 
 To start a local development server, run:

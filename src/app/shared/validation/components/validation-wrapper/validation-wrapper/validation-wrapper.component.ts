@@ -22,11 +22,15 @@ export class ValidationWrapperComponent {
   public readonly error = signal<string | null>(null);
   private readonly formChild = contentChild(FormField);
 
+  private readonly formErrors = computed(() => {
+    return  this.formChild()?.errors();
+  });
+
   private readonly shouldShowError = computed(() => {
     if (!this.formChild()) return;
 
     const isTouched = this.formChild()!.state().touched();
-    const errors = this.formChild()!.errors();
+    const errors = this.formErrors();
     const hasErrors = errors!.length > 0;
 
     return isTouched && hasErrors;
@@ -41,13 +45,9 @@ export class ValidationWrapperComponent {
     effect(() => {
       this.error.set(
         this.debounceShowError()
-          ? untracked(() => this.getErrorMessage(this.formChild()!.errors()[0]))
+          ? validationMessageHelper(this.formErrors()![0])
           : null,
       );
     });
-  }
-
-  private getErrorMessage(error: ValidationError): string {
-    return validationMessageHelper(error);
   }
 }
